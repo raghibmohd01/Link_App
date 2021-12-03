@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "707016312307",
+    "project_id": "link-app-4a9c6",
+    "storage_bucket": "link-app-4a9c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707016312307:android:0f24fda0fff03a0a69be86",
+        "android_client_info": {
+          "package_name": "com.raghib.linkapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707016312307-29nqtfm3a3tvbstkvms0p38ci7tr5u7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD_gkV4CdhB-mDK35aceuQFxjusFvrw_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707016312307-29nqtfm3a3tvbstkvms0p38ci7tr5u7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
