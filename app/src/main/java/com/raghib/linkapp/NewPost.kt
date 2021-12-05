@@ -19,13 +19,13 @@ class NewPost : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_post)
         etPost = findViewById(R.id.etPost)
-        var inputText: String = etPost.text.toString().trim()
+
         btnPost = findViewById<Button>(R.id.btnPost)
 
 
         btnPost.setOnClickListener {
 
-
+            var inputText: String = etPost.text.toString().trim()
 
 //                    if(inputText.isNotEmpty()) {
                         GlobalScope.launch {

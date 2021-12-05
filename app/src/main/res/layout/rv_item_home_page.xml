@@ -3,17 +3,21 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    android:layout_height="match_parent">
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="200dp"
+        android:padding="10dp"
         >
         <ImageView
 
             android:id="@+id/imgUser"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
             android:src="@drawable/ic_baseline_person_24"
             />
         <TextView
@@ -25,18 +29,19 @@
             android:textSize="18sp"
             android:layout_toRightOf="@+id/imgUser"
             android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/postTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4: 30 Am 3 Dec 2021"
+            android:text=""
+            android:textSize="10sp"
             android:layout_toRightOf="@+id/imgUser"
             android:layout_below="@+id/userName"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/tvPost"

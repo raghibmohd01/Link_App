@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/etPost"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_marginTop="36dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
