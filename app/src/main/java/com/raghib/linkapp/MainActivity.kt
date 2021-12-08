@@ -1,51 +1,80 @@
 package com.raghib.linkapp
 
-import android.app.DownloadManager
-import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.youtube.player.internal.l
 import com.google.firebase.firestore.Query
-import com.google.firebase.ktx.Firebase
 import com.raghib.linkapp.adapters.PostAdapter
 import com.raghib.linkapp.daos.PostDao
 import com.raghib.linkapp.models.Post
-import java.util.*
 
-lateinit var fab: FloatingActionButton
+
 lateinit var rvHome: RecyclerView
 class MainActivity : AppCompatActivity() {
 
     val postDao:PostDao= PostDao()
     lateinit var postAdapter:PostAdapter
+    lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fab=findViewById(R.id.fab)
+
         rvHome=findViewById(R.id.rvHome)
-        
-        fab.setOnClickListener {
-            val intent=Intent(this,NewPost::class.java)
-            startActivity(intent)
+        bottomNavigationView=findViewById(R.id.bottomNavigationView)
+
+
+
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.item_home -> {
+                    //setContentView(R.layout.activity_main)
+                    supportActionBar!!.title="Home"
+
+                    true
+                }
+                R.id.item_post -> {
+
+                    val intent = Intent(this, NewPost::class.java)
+                    startActivity(intent)
+
+                    true
+                }
+                R.id.item_trending -> {
+
+                    Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show()
+                    supportActionBar!!.title="Trending"
+                    true
+                }
+                R.id.item_notification -> {
+
+                    Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show()
+                    supportActionBar!!.title="Notification"
+                    true
+                }
+
+                R.id.item_profile -> {
+
+                    Toast.makeText(this, "coming soon..", Toast.LENGTH_SHORT).show()
+                    supportActionBar!!.title ="My Profile"
+                    true
+                }
+                else -> false
+            }
         }
+
+
+
+
         val query=postDao.postCollection.orderBy("createdAt", Query.Direction.DESCENDING)
         val rvOptions=FirestoreRecyclerOptions.Builder<Post>().setQuery(query,Post::class.java).build()
 
@@ -54,6 +83,33 @@ class MainActivity : AppCompatActivity() {
         rvHome.adapter=postAdapter
 
 
+        scrollActions()            //detects user scroll activities on Home RV
+
+    }
+
+    private fun scrollActions() {
+        rvHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (!recyclerView.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //reached top
+                    Log.d("scroll", ": reached top")
+                    bottomNavigationView.visibility= View.VISIBLE
+                    supportActionBar!!.show()
+                }
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Log.d("scroll", " : reached end")
+                    bottomNavigationView.visibility= View.VISIBLE
+                }
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING){
+                    Log.d("scroll", " :scrolling ")
+                    bottomNavigationView.visibility= View.GONE
+                    supportActionBar!!.hide()
+                }
+
+            }
+        })
 
 
     }

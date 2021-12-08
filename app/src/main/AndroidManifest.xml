@@ -2,13 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.raghib.linkapp">
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_link"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_link_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LinkApp">
+
+
+
+        <activity
+            android:name=".YouTube"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".NewPost"
             android:exported="false" />
@@ -23,7 +33,14 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+
     </application>
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
+
 
 </manifest>

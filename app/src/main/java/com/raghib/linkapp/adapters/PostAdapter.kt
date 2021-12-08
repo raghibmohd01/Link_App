@@ -1,17 +1,22 @@
 package com.raghib.linkapp.adapters
 
 import android.media.Image
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.raghib.linkapp.R
+import com.raghib.linkapp.daos.PostDao
 import com.raghib.linkapp.models.Post
 import com.raghib.linkapp.utils.TimeUtils
 
@@ -33,8 +38,18 @@ class PostAdapter(options: FirestoreRecyclerOptions<Post>) : FirestoreRecyclerAd
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
 
-        return  PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_item_home_page,parent,false))
+        val viewHolder=  PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_item_home_page,parent,false))
 
+        viewHolder.imgLike.setOnClickListener {
+
+            if(PostDao().addLiked(snapshots.getSnapshot(viewHolder.adapterPosition).id))
+            {
+                viewHolder.imgLike.setImageResource(R.drawable.ic_liked)
+            }
+            else
+                viewHolder.imgLike.setImageResource(R.drawable.ic_not_liked)
+        }
+        return  viewHolder
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int, model: Post) {
@@ -43,6 +58,28 @@ class PostAdapter(options: FirestoreRecyclerOptions<Post>) : FirestoreRecyclerAd
         holder.likeCount.text=model.likedBy.size.toString()
         holder.tvPost.text=model.text
         Glide.with(holder.imgUser.context).load(model.user.imgUrl).circleCrop().into(holder.imgUser)
+
+        if(model.likedBy.contains(Firebase.auth.currentUser!!.uid))
+         holder.imgLike.setImageResource(R.drawable.ic_liked)
+        else
+            holder.imgLike.setImageResource(R.drawable.ic_not_liked)
+
+
+//
+//        val auth=Firebase.auth
+//        holder.imgLike.setOnClickListener {
+//            if(model.likedBy.contains(auth.currentUser!!.uid))
+//            {
+//                model.likedBy.remove(auth.currentUser!!.uid)
+//            }
+//            else
+//            { model.likedBy.add(auth.currentUser!!.uid)
+//
+//            }
+//            PostDao().addLiked()
+//
+//        }
+
 
     }
 

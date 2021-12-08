@@ -41,9 +41,12 @@ class SingIn : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(this,gso)
 
         auth= Firebase.auth
+
+        googleSignInClient = GoogleSignIn.getClient(this,gso)
+
+
 
 
         signInButton.setOnClickListener {
@@ -61,11 +64,13 @@ class SingIn : AppCompatActivity() {
 
     private fun signIn() {                                //signed in user using google account
 
-        progressBar.visibility = View.VISIBLE
-        signInButton.visibility = View.GONE
+
+        //signInButton.visibility = View.GONE
 
         val signInIntent = googleSignInClient.signInIntent              //shows list of users in device
+        progressBar.visibility = View.VISIBLE
         startActivityForResult(signInIntent, RC_SIGN_IN)
+
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

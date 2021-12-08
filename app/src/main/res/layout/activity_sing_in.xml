@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".SingIn">
 
+
+    <ImageView
+        android:layout_width="252dp"
+        android:layout_height="229dp"
+        android:src="@drawable/link_app_logo"
+        app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="0dp"

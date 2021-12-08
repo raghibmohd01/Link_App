@@ -18,8 +18,10 @@ class NewPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_post)
-        etPost = findViewById(R.id.etPost)
 
+        supportActionBar!!.title="New Post"
+
+        etPost = findViewById(R.id.etPost)
         btnPost = findViewById<Button>(R.id.btnPost)
 
 
